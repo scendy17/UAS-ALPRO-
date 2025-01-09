@@ -1,0 +1,55 @@
+def tampil_keranjang(keranjang):
+    print("\n================ Keranjang Belanja : =================")
+    for barang in keranjang:
+        print(f"|Nama :{barang['nama']} | Jumlah : {barang['jumlah']} | Harga: {barang['harga']}|") #konsultasi bagaimana bisa rapih kebawahnya
+
+
+def hitung_total(keranjang):
+    total = 0
+    for barang in keranjang:
+        total += barang['jumlah'] * barang['harga']
+        return total
+
+def main():
+    keranjang = []
+    while True:
+        print("\n============== Menu Kasir Waroeng Goarek : ===============")
+        print("1. Tambahkan Barang")
+        print("2. Keranjang")
+        print("3. Selesai Belanja")
+        pilihan = input("Pilih menu (1/2/3): ")
+
+        if pilihan == '1':
+            nama_barang = input("Masukkan nama barang: ")
+            jumlah = int(input("Masukkan jumlah: "))
+            harga = float(input("Masukkan harga: "))
+
+            keranjang.append({'nama': nama_barang, 'jumlah': jumlah, 'harga': harga}) #append menambahkan value kedalam dict
+            print(f"{nama_barang} telah ditambahkan ke keranjang.")
+        
+        elif pilihan == '2':
+            tampil_keranjang(keranjang)
+
+        elif pilihan == '3':
+            total = hitung_total(keranjang) 
+            print(f"\nTotal Belanja :",'Rp.',total)
+
+            if (total >= 50000):
+                diskon = total * 0.10
+            else:
+                diskon = 0
+
+            total_setelah_diskon = total - diskon
+            print("Total setelah diskon :",'Rp.',total_setelah_diskon)
+            
+            uang = float(input("Masukkan jumlah uang: "))
+            kembalian = uang - total_setelah_diskon
+            print("Kembalian :",'Rp.',kembalian)
+
+            print("Terima kasih telah berbelanja!")
+            break
+
+        else:
+            print("Pilihan tidak valid. Silakan pilih 1, 2, atau 3.")
+    
+main()
