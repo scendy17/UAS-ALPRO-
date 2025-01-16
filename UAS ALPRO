@@ -1,8 +1,7 @@
 def tampil_keranjang(keranjang):
-    print("\n================ Keranjang Belanja : =================")
+    print("\n==================================== Keranjang Belanja ====================================")
     for barang in keranjang:
-        print(f"|Nama :{barang['nama']} | Jumlah : {barang['jumlah']} | Harga: {barang['harga']}|") #konsultasi bagaimana bisa rapih kebawahnya
-
+        print(f"| Nama: {barang['nama']:<15} | Jumlah: {barang['jumlah']:<6} | Harga: Rp.{barang['harga']:<10} | SubTotal: Rp.{barang['subtotal']:<10} |") #konsultasi bagaimana bisa rapih kebawahnya
 
 def hitung_total(keranjang):
     total = 0
@@ -13,7 +12,7 @@ def hitung_total(keranjang):
 def main():
     keranjang = []
     while True:
-        print("\n============== Menu Kasir Waroeng Goarek : ===============")
+        print("\n====================== Menu Kasir Waroeng Meduro ======================")
         print("1. Tambahkan Barang")
         print("2. Keranjang")
         print("3. Selesai Belanja")
@@ -24,7 +23,7 @@ def main():
             jumlah = int(input("Masukkan jumlah: "))
             harga = float(input("Masukkan harga: "))
 
-            keranjang.append({'nama': nama_barang, 'jumlah': jumlah, 'harga': harga}) #append menambahkan value kedalam dict
+            keranjang.append({'nama': nama_barang, 'jumlah': jumlah, 'harga': harga, 'subtotal': jumlah * harga }) #append menambahkan value kedalam dict
             print(f"{nama_barang} telah ditambahkan ke keranjang.")
         
         elif pilihan == '2':
@@ -32,7 +31,7 @@ def main():
 
         elif pilihan == '3':
             total = hitung_total(keranjang) 
-            print(f"\nTotal Belanja :",'Rp.',total)
+            print(f"\nTotal Belanja : Rp.{int(total):,d}") #konsultasi bagaimana bisa rapih kebawahnya (total)
 
             if (total >= 50000):
                 diskon = total * 0.10
@@ -40,13 +39,12 @@ def main():
                 diskon = 0
 
             total_setelah_diskon = total - diskon
-            print("Total setelah diskon :",'Rp.',total_setelah_diskon)
+            print(f"Total setelah diskon : Rp.{int(total_setelah_diskon):,d}")
             
-            uang = float(input("Masukkan jumlah uang: "))
+            uang = float(input("Masukkan jumlah uang : "))
             kembalian = uang - total_setelah_diskon
-            print("Kembalian :",'Rp.',kembalian)
-
-            print("Terima kasih telah berbelanja!")
+            print(f"Kembalian : Rp.{int(kembalian):,d}")
+            print("Terima kasih telah berbelanja di Waroeng Meduro!")
             break
 
         else:
