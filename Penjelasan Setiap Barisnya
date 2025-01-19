@@ -1,0 +1,57 @@
+def tampil_keranjang(keranjang):  # Mendefinisikan fungsi untuk menampilkan keranjang belanja
+    print("\n==================================== Keranjang Belanja ====================================")  # Mencetak judul keranjang belanja
+    for barang in keranjang:  # Memulai loop untuk setiap barang dalam keranjang
+        print(f"| Nama: {barang['nama']:<15} | Jumlah: {barang['jumlah']:<6} | Harga: Rp.{int(barang['harga']):<10,d} | SubTotal: Rp.{int(barang['subtotal']):<10,d} |")  # Mencetak detail barang
+    print("===========================================================================================")  # Mencetak garis pemisah di bawah keranjang belanja
+
+def hitung_total(keranjang):  # Mendefinisikan fungsi untuk menghitung total belanja
+    total = 0  # Menginisialisasi total dengan 0
+    for barang in keranjang:  # Memulai loop untuk setiap barang dalam keranjang
+        total += barang['jumlah'] * barang['harga']  # Menghitung subtotal dan menambahkannya ke total
+    return total  # Mengembalikan total belanja
+
+def main():  # Mendefinisikan fungsi utama
+    keranjang = []  # Menginisialisasi keranjang sebagai daftar kosong
+    while True:  # Memulai loop tak terbatas
+        print("\n=============================== Menu Kasir Waroeng Meduro =================================")  # Mencetak menu utama
+        print("1. Tambahkan Barang")  # Opsi untuk menambahkan barang
+        print("2. Keranjang")  # Opsi untuk menampilkan keranjang
+        print("3. Selesai Belanja")  # Opsi untuk menyelesaikan belanja
+        pilihan = input("Pilih menu (1/2/3): ")  # Mengambil input dari pengguna untuk memilih menu
+
+        if pilihan == '1':  # Jika pengguna memilih untuk menambahkan barang
+            nama_barang = input("Masukkan nama barang : ")  # Mengambil nama barang dari pengguna
+            jumlah = int(input("Masukkan jumlah : "))  # Mengambil jumlah barang dari pengguna dan mengonversinya ke integer
+            harga = float(input("Masukkan harga : "))  # Mengambil harga barang dari pengguna dan mengonversinya ke float
+
+            keranjang.append({'nama': nama_barang, 'jumlah': jumlah, 'harga': harga, 'subtotal': jumlah * harga })  # Menambahkan barang ke keranjang
+            print(f"{nama_barang} telah ditambahkan ke keranjang.")  # Mencetak konfirmasi bahwa barang telah ditambahkan
+        
+        elif pilihan == '2':  # Jika pengguna memilih untuk melihat keranjang
+            tampil_keranjang(keranjang)  # Memanggil fungsi untuk menampilkan keranjang
+
+        elif pilihan == '3':  # Jika pengguna memilih untuk menyelesaikan belanja
+            total = hitung_total(keranjang)  # Menghitung total belanja
+            print("\n=================================== Rincian Pembayaran ====================================")  # Mencetak judul rincian pembayaran
+            print(f"Total Belanja : Rp.{int(total):,d}")  # Mencetak total belanja dengan format ribuan
+
+            if (total >= 50000):  # Jika total belanja lebih dari atau sama dengan 50.000
+                diskon = total * 0.10  # Menghitung diskon 10%
+                print(f"Diskon (10%) : Rp.{int(diskon):,d}")  # Mencetak jumlah diskon
+            else:  # Jika total belanja kurang dari 50.000
+                diskon = 0  # Tidak ada diskon
+                print("Diskon : Rp.0")  # Mencetak bahwa tidak ada diskon
+
+            total_setelah_diskon = total - diskon  # Menghitung total setelah diskon
+            print(f"Total setelah diskon : Rp.{int(total_setelah_diskon):,d}")  # Mencetak total setelah diskon
+            
+            uang = float(input("Masukkan jumlah uang : "))  # Mengambil jumlah uang dari pengguna
+            kembalian = uang - total_setelah_diskon  # Menghitung kembalian
+            print(f"Kembalian : Rp.{int(kembalian):,d}")  # Mencetak jumlah kembalian
+            print("Terima kasih telah berbelanja di Waroeng Meduro!")  # Mencetak pesan terima kasih
+            break  # Menghentikan loop
+
+        else:  # Jika pilihan tidak valid
+            print("Pilihan tidak valid. Silakan pilih 1, 2, atau 3.")
+    
+main()
