@@ -16,7 +16,7 @@ def main():
         print("\n=============================== Menu Kasir Waroeng Meduro =================================")
         print("1. Tambahkan Barang")
         print("2. Keranjang")
-        print("3. Selesai Belanja")
+        print("3. Bayar dan Selesai Belanja")
         pilihan = input("Pilih menu (1/2/3): ")
 
         if pilihan == '1':
